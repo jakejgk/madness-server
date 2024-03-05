@@ -28,7 +28,7 @@ app.post("/submit", async (req, res) => {
     const values = [email, JSON.stringify(steak)];
 
     const { rows } = await db.query(queryText, values);
-    // const { rows } = await db.query(queryText, values);
+
     res.json(rows[0]);
   } catch (error) {
     console.error("Error saving to database", error);
