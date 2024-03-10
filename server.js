@@ -36,6 +36,16 @@ app.post("/submit", async (req, res) => {
   }
 });
 
+app.post("/score", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const queryText = "SELECT steaks FROM madness WHERE email = VALUE($1)"
+    const value = email
+    const {rows} = await db.query(queryText, value)
+    res.json(rows[0])
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
