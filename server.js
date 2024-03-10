@@ -39,10 +39,12 @@ app.post("/submit", async (req, res) => {
 app.post("/score", async (req, res) => {
   const { email } = req.body;
   try {
-    const queryText = "SELECT steaks FROM madness WHERE email = VALUE($1)"
-    const value = email
-    const {rows} = await db.query(queryText, value)
-    res.json(rows[0])
+    const queryText = "SELECT steaks FROM madness WHERE email = VALUE($1)";
+    const value = email;
+    const { rows } = await db.query(queryText, value);
+    res.json(rows[0]);
+  } catch (error) {
+    console.log("Error checking score: ", error);
   }
 });
 
