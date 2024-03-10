@@ -43,6 +43,7 @@ app.post("/score", async (req, res) => {
     const value = email;
     const { rows } = await db.query(queryText, value);
     res.json(rows[0]);
+    return rows[0];
   } catch (error) {
     console.log("Error checking score: ", error);
   }
