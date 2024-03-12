@@ -39,11 +39,33 @@ app.post("/submit", async (req, res) => {
 app.post("/score", async (req, res) => {
   const { email } = req.body;
   try {
-    const queryText = "SELECT steaks FROM madness WHERE email = VALUE($1)";
-    const value = email;
-    const { rows } = await db.query(queryText, value);
-    res.json(rows[0]);
-    return rows[0];
+    const queryText = "SELECT steak FROM madness WHERE email = $1";
+    const values = [email];
+    const { rows } = await db.query(queryText, values);
+
+    if (rows.length > 0) {
+      res.json(rows[0]); // Send the first matching row back to the client
+    } else {
+      res.status(404).send("No matching records found.");
+    }
+  } catch (error) {
+    console.log("Error checking score: ", error);
+  }
+});
+
+app.get("/leaderboard", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const queryText = "SELECT steak FROM madness";
+    // const values = [email];
+    const { rows } = await db.query(queryText);
+
+    if (rows.length > 0) {
+      console.log("rows; ", rows);
+      res.json(rows[0]); // Send the first matching row back to the client
+    } else {
+      res.status(404).send("No matching records found.");
+    }
   } catch (error) {
     console.log("Error checking score: ", error);
   }
