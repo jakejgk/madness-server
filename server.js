@@ -71,8 +71,8 @@ app.get("/leaderboard", async (req, res) => {
   }
 });
 
-app.get("/emailExist", async (req, res) => {
-  const email = req.query.email;
+app.post("/emailExist", async (req, res) => {
+  const { email } = req.body;
   try {
     const queryText = "SELECT email FROM madness WHERE email = $1";
     const { rows } = await pool.query(queryText, [email]); // Use parameterized query for safety
