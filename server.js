@@ -71,6 +71,23 @@ app.get("/leaderboard", async (req, res) => {
   }
 });
 
+app.get("/emailExist", async (req, res) => {
+  const email = req.query.email;
+  try {
+    const queryText = "SELECT email FROM madness WHERE email = $1";
+    const { rows } = await pool.query(queryText, [email]); // Use parameterized query for safety
+    if (rows.length > 0) {
+      // Email exists
+      res.json({ exists: true });
+    } else {
+      // Email does not exist
+      res.json({ exists: false });
+    }
+  } catch (error) {
+    console.log("error checking if email exists: ", error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
