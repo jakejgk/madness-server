@@ -21,7 +21,7 @@ app.get("/madness", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   const { displayName, email, bracket } = req.body;
-
+  console.log(displayName);
   try {
     const queryText =
       "INSERT INTO madness(display_name, email, steak) VALUES($1, $2, $3) RETURNING *";
