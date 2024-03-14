@@ -20,12 +20,12 @@ app.get("/madness", async (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-  const { email, bracket } = req.body;
+  const { displayName, email, bracket } = req.body;
 
   try {
     const queryText =
-      "INSERT INTO madness(email, steak) VALUES($1, $2) RETURNING *";
-    const values = [email, JSON.stringify(bracket)];
+      "INSERT INTO madness(displayName, email, steak) VALUES($1, $2, $3) RETURNING *";
+    const values = [displayName, email, JSON.stringify(bracket)];
 
     const { rows } = await db.query(queryText, values);
 
