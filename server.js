@@ -24,7 +24,7 @@ app.post("/submit", async (req, res) => {
 
   try {
     const queryText =
-      "INSERT INTO madness(displayName, email, steak) VALUES($1, $2, $3) RETURNING *";
+      "INSERT INTO madness(display_name, email, steak) VALUES($1, $2, $3) RETURNING *";
     const values = [displayName, email, JSON.stringify(bracket)];
 
     const { rows } = await db.query(queryText, values);
