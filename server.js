@@ -75,7 +75,8 @@ app.post("/emailExist", async (req, res) => {
   const { email } = req.body;
   try {
     const queryText = "SELECT email FROM madness WHERE email = $1";
-    const { rows } = await pool.query(queryText, [email]); // Use parameterized query for safety
+    const { rows } = await db.query(queryText, [email]); // Use parameterized query for safety
+    console.log(rows);
     if (rows.length > 0) {
       // Email exists
       res.json({ exists: true });
