@@ -43,19 +43,6 @@ app.post("/submit", async (req, res) => {
     console.error("Error saving to database", error);
     res.status(500).send("Server Error");
   }
-  try {
-    const space = " | ";
-    const discNotif = await fetch(
-      "https://discord.com/api/webhooks/1218229016734208050/02mufXEcK__hB6zbVBVnUQ0RFlbXz6AOFwaIHIZZ6ewDEMVInWw80gcdj_AJ4sp--oZT",
-      {
-        method: "POST",
-        "Content-type": "application/json",
-        body: { content: JSON.stringify({ email, space, displayName }) },
-      }
-    );
-  } catch (error) {
-    console.log("Error sending to discord: ", error);
-  }
 });
 
 app.post("/score", async (req, res) => {
