@@ -49,7 +49,8 @@ app.post("/submit", async (req, res) => {
       "https://discord.com/api/webhooks/1218229016734208050/02mufXEcK__hB6zbVBVnUQ0RFlbXz6AOFwaIHIZZ6ewDEMVInWw80gcdj_AJ4sp--oZT",
       {
         method: "POST",
-        body: JSON.stringify({ email, space, displayName }),
+        "Content-type": "application/json",
+        body: { content: JSON.stringify({ email, space, displayName }) },
       }
     );
   } catch (error) {
