@@ -18,10 +18,19 @@ app.get("/madness", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+function discNotif(email, displayName) {
+  return {
+    method: "POST",
+    url: "https://discord.com/api/webhooks/1140286423451312230/6X0rL7Inc98E8n2chMxFXcJQu4Qpc304YlbC6AuSbMvjQvWdG7f--C81XzWfd5bcHGwb",
+    data: {
+      content: `[${count}] ${email}`,
+    },
+  };
+}
 
 app.post("/submit", async (req, res) => {
   const { displayName, email, bracket } = req.body;
-  console.log(displayName);
+
   try {
     const queryText =
       "INSERT INTO madness(display_name, email, steak) VALUES($1, $2, $3) RETURNING *";
@@ -33,6 +42,18 @@ app.post("/submit", async (req, res) => {
   } catch (error) {
     console.error("Error saving to database", error);
     res.status(500).send("Server Error");
+  }
+  try {
+    const space = " | ";
+    const discNotif = await fetch(
+      "https://discord.com/api/webhooks/1218229016734208050/02mufXEcK__hB6zbVBVnUQ0RFlbXz6AOFwaIHIZZ6ewDEMVInWw80gcdj_AJ4sp--oZT",
+      {
+        method: "POST",
+        body: JSON.stringify({ email, space, displayName }),
+      }
+    );
+  } catch (error) {
+    console.log("Error sending to discord: ", error);
   }
 });
 
