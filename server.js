@@ -45,7 +45,7 @@ app.post("/submit", async (req, res) => {
   }
 });
 
-app.post("/score", async (req, res) => {
+app.post("/get-bracket", async (req, res) => {
   const { email } = req.body;
   try {
     const queryText = "SELECT steak FROM madness WHERE email = $1";
