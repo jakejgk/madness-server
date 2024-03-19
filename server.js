@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("./db"); // Import the database connection
 const cors = require("cors");
+const bracketMaster = require("./masterBracket");
 
 const app = express();
 const port = 3001;
@@ -18,6 +19,7 @@ app.get("/madness", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
 function discNotif(email, displayName) {
   return {
     method: "POST",
@@ -51,9 +53,12 @@ app.post("/get-bracket", async (req, res) => {
     const queryText = "SELECT steak FROM madness WHERE email = $1";
     const values = [email];
     const { rows } = await db.query(queryText, values);
+    const parsedSteak = JSON.parse(rows[0].steak);
+
+    const score = scoreBracket(parsedSteak, bracketMaster);
 
     if (rows.length > 0) {
-      res.json(rows[0]); // Send the first matching row back to the client
+      res.json({ steak: parsedSteak, score: score }); // Send the first matching row back to the client
     } else {
       res.status(404).send("No matching records found.");
     }
@@ -101,3 +106,58 @@ app.post("/emailExist", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
+
+function scoreBracket(userBracket, masterBracket) {
+  // underdog scores as well
+  let score = 0;
+  const pointsPerRound = {
+    round1: 100,
+    round2: 200,
+    round3: 400,
+    round4: 1000,
+  };
+
+  Object.keys(pointsPerRound).forEach((roundKey) => {
+    const roundPoints = pointsPerRound[roundKey];
+    const userMatches = userBracket[roundKey];
+    const masterMatches = masterBracket[roundKey];
+
+    userMatches.forEach((userMatch, index) => {
+      const masterMatch = masterMatches.find(
+        (match) => match.id === userMatch.id
+      );
+      if (!masterMatch) {
+        console.warn(
+          `No matching match found in master bracket for ${userMatch.id}`
+        );
+        return;
+      }
+
+      // Compare winners
+      userMatch.participants.forEach((participant) => {
+        const masterParticipant = masterMatch.participants.find(
+          (p) => p.id === participant.id
+        );
+        // If the participant is marked as winner in both user's and master's brackets
+        if (
+          participant.isWinner &&
+          masterParticipant &&
+          masterParticipant.isWinner
+        ) {
+          let matchScore = roundPoints;
+          // Identify the opponent in the match
+          const opponent = userMatch.participants.find(
+            (p) => p.id !== participant.id
+          );
+          // Apply underdog bonus if applicable
+          if (participant.seed > opponent.seed) {
+            matchScore *= 1.5;
+          }
+          score += matchScore;
+        }
+      });
+    });
+  });
+
+  return score;
+}
