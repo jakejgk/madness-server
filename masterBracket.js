@@ -9,7 +9,7 @@ const bracketMaster = {
         {
           id: "japaneseWagyuFilet1",
           seed: 1,
-          isWinner: null,
+          isWinner: true,
           name: "Japanese Wagyu Filet",
           image: {
             __typename: "Image",
@@ -319,7 +319,7 @@ const bracketMaster = {
       tournamentRoundText: "2",
       participants: [
         {
-          id: "",
+          id: "japaneseWagyuFilet1",
           isWinner: null,
           name: "",
         },
