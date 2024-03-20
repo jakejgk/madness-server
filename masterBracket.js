@@ -23,7 +23,7 @@ const bracketMaster = {
         {
           id: "usdaPrimeDenver",
           seed: 16,
-          isWinner: true,
+          isWinner: false,
           name: "USDA Prime Denver",
           image: {
             __typename: "Image",
@@ -283,13 +283,13 @@ const bracketMaster = {
         {
           id: "australianWagyuFilet2", // Unique identifier of any kind
           seed: 2,
-          isWinner: null,
+          isWinner: true,
           name: "Australian Wagyu Filet",
           image: {
             __typename: "Image",
             id: "gid://shopify/ProductImage/53165108363541",
             url: "https://cdn.shopify.com/s/files/1/0789/7409/1541/files/2282.png?v=1704221444",
-            altText: null,
+            altText: false,
             width: 4692,
             height: 4692,
           },
@@ -377,7 +377,7 @@ const bracketMaster = {
       // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
-          id: "", // Unique identifier of any kind
+          id: "australianWagyuFilet2", // Unique identifier of any kind
           // Any string works
           isWinner: null,
 
