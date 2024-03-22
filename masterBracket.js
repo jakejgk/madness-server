@@ -201,7 +201,7 @@ const bracketMaster = {
           id: "australianWagyuBavette3", // Unique identifier of any kind
           seed: 3,
           // Any string works
-          isWinner: null,
+          isWinner: false,
 
           name: "Australian Wagyu Bavette",
           image: {
@@ -217,7 +217,7 @@ const bracketMaster = {
           id: "japaneseWagyuPicanha14",
           seed: 14,
 
-          isWinner: null,
+          isWinner: true,
           // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
           name: "Japanese Wagyu Picanha",
           image: {
@@ -357,9 +357,9 @@ const bracketMaster = {
       // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
-          id: "",
+          id: "japaneseWagyuPicanha14",
           isWinner: null,
-          name: "",
+          name: "Japanese Wagyu Picanha",
         },
         {
           id: "",
