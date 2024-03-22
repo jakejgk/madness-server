@@ -119,7 +119,7 @@ const bracketMaster = {
         {
           id: "australianWagyuDenver4", // Unique identifier of any kind
           seed: 4,
-          isWinner: null,
+          isWinner: false,
           name: "Australian Wagyu Denver",
           image: {
             __typename: "Image",
@@ -133,7 +133,7 @@ const bracketMaster = {
         {
           id: "australianWagyuPicanhaMr13",
           seed: 13,
-          isWinner: null,
+          isWinner: true,
           // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
           name: "Australian Wagyu Picanha - Margaret River",
           image: {
@@ -341,9 +341,9 @@ const bracketMaster = {
           name: "",
         },
         {
-          id: "",
+          id: "australianWagyuPicanhaMr13",
           isWinner: null,
-          name: "",
+          name: "Australian Wagyu Picanha - Margaret River",
         },
       ],
     },
