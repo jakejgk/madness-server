@@ -75,7 +75,6 @@ app.get("/leaderboard", async (req, res) => {
     const { rows } = await db.query(queryText);
 
     if (rows.length > 0) {
-      console.log("rows; ", rows);
       res.json(rows[0]); // Send the first matching row back to the client
     } else {
       res.status(404).send("No matching records found.");
@@ -179,7 +178,7 @@ async function fetchBrackets(client) {
   let people = rows.map((row) => {
     const displayName = row.display_name;
     const parsedSteak = JSON.parse(row.steak);
-    console.log(parsedSteak);
+
     const winner = parsedSteak.round4[0].participants
       .filter((participant) => participant.isChampion)
       .map((participant) => participant.name)[0];
@@ -208,6 +207,6 @@ async function fetchBrackets(client) {
 
   // Now, people array is sorted by score and ranked, including ties.
   // You can proceed with passing this data to the frontend or handling it as needed.
-  console.log("people is: ", people);
+
   return people; // For example, returning the sorted and ranked list.
 }
