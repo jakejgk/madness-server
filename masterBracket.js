@@ -216,7 +216,6 @@ const bracketMaster = {
         {
           id: "japaneseWagyuPicanha14",
           seed: 14,
-
           isWinner: true,
           // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
           name: "Japanese Wagyu Picanha",
@@ -353,18 +352,16 @@ const bracketMaster = {
       name: "Match 11",
       nextMatchId: 14, // Id for the nextMatch in the bracket, if it's final match it must be null OR undefined
       tournamentRoundText: "2", // Text for Round Header
-
-      // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
-        {
-          id: "japaneseWagyuPicanha14",
-          isWinner: null,
-          name: "Japanese Wagyu Picanha",
-        },
         {
           id: "",
           isWinner: null,
           name: "",
+        },
+        {
+          id: "japaneseWagyuPicanha14",
+          isWinner: null,
+          name: "Japanese Wagyu Picanha",
         },
       ],
     },
@@ -373,22 +370,16 @@ const bracketMaster = {
       name: "Match 12",
       nextMatchId: 14, // Id for the nextMatch in the bracket, if it's final match it must be null OR undefined
       tournamentRoundText: "2", // Text for Round Header
-
-      // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
-          id: "australianWagyuFilet2", // Unique identifier of any kind
-          // Any string works
+          id: "",
           isWinner: null,
-
           name: "",
         },
         {
-          id: "",
-
+          id: "australianWagyuFilet2",
           isWinner: null,
-          // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
-          name: "",
+          name: "Australian Wagyu Filet",
         },
       ],
     },
