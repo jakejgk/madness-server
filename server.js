@@ -90,7 +90,7 @@ app.post("/emailExist", async (req, res) => {
   try {
     const queryText = "SELECT email FROM madness WHERE email = $1";
     const { rows } = await db.query(queryText, [email]); // Use parameterized query for safety
-    console.log(rows);
+
     if (rows.length > 0) {
       // Email exists
       res.json({ exists: true });
@@ -160,4 +160,54 @@ function scoreBracket(userBracket, masterBracket) {
   });
 
   return score;
+}
+
+app.get("/get-leaderboard", async (req, res) => {
+  let allBrackets;
+  try {
+    allBrackets = await fetchBrackets();
+    res.json({ success: true, leaderboard: allBrackets });
+  } catch (error) {
+    console.log("Error fetching all brackets: ", allBrackets);
+    res.json({ success: false });
+  }
+});
+
+async function fetchBrackets(client) {
+  const queryText = "SELECT id, display_name, steak FROM madness";
+  const { rows } = await db.query(queryText); // Make sure this is correct for your DB client
+  let people = rows.map((row) => {
+    const displayName = row.display_name;
+    const parsedSteak = JSON.parse(row.steak);
+    console.log(parsedSteak);
+    const winner = parsedSteak.round4[0].participants
+      .filter((participant) => participant.isChampion)
+      .map((participant) => participant.name)[0];
+
+    const score = scoreBracket(parsedSteak, bracketMaster); // Assuming this function is defined elsewhere
+    return { id: row.id, displayName, score, winner };
+  });
+
+  // Sort by score in descending order
+  people.sort((a, b) => b.score - a.score);
+
+  // Assign rank
+  let rank = 0;
+  let previousScore = -1;
+  let peopleAtCurrentScore = 0;
+  people = people.map((person, index) => {
+    if (person.score !== previousScore) {
+      rank += peopleAtCurrentScore > 0 ? peopleAtCurrentScore : 1;
+      previousScore = person.score;
+      peopleAtCurrentScore = 1;
+    } else {
+      peopleAtCurrentScore++;
+    }
+    return { ...person, rank };
+  });
+
+  // Now, people array is sorted by score and ranked, including ties.
+  // You can proceed with passing this data to the frontend or handling it as needed.
+  console.log("people is: ", people);
+  return people; // For example, returning the sorted and ranked list.
 }
