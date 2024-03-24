@@ -81,7 +81,7 @@ const bracketMaster = {
         {
           id: "usdaPrimePicanha5", // Unique identifier of any kind
           seed: 5,
-          isWinner: null,
+          isWinner: true,
           name: "USDA Prime Picanha",
           image: {
             __typename: "Image",
@@ -95,7 +95,7 @@ const bracketMaster = {
         {
           id: "australianWagyuTriTip12",
           seed: 12,
-          isWinner: null,
+          isWinner: false,
           name: "Australian Wagyu Tri Tip",
           image: {
             __typename: "Image",
@@ -336,9 +336,9 @@ const bracketMaster = {
       tournamentRoundText: "2", // Text for Round Header
       participants: [
         {
-          id: "",
+          id: "usdaPrimePicanha5",
           isWinner: null,
-          name: "",
+          name: "USDA Prime Picanha",
         },
         {
           id: "australianWagyuPicanhaMr13",
