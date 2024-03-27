@@ -158,9 +158,7 @@ const bracketMaster = {
         {
           id: "australianWagyuFlatIron6", // Unique identifier of any kind
           seed: 6,
-          // Any string works
-          isWinner: null,
-
+          isWinner: true,
           name: "Australian Wagyu Flat Iron",
           image: {
             __typename: "Image",
@@ -174,9 +172,7 @@ const bracketMaster = {
         {
           id: "australianWagyuPicanhaSa11",
           seed: 11,
-
-          isWinner: null,
-          // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
+          isWinner: false,
           name: "Australian Wagyu Picanha - Stone Axe",
           image: {
             __typename: "Image",
@@ -194,7 +190,6 @@ const bracketMaster = {
       name: "Match 3",
       nextMatchId: 11, // Id for the nextMatch in the bracket, if it's final match it must be null OR undefined
       tournamentRoundText: "1", // Text for Round Header
-
       // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
@@ -235,15 +230,11 @@ const bracketMaster = {
       name: "Match 7",
       nextMatchId: 12, // Id for the nextMatch in the bracket, if it's final match it must be null OR undefined
       tournamentRoundText: "1", // Text for Round Header
-
-      // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
           id: "japaneseWagyuRibeye7", // Unique identifier of any kind
           seed: 7,
-          // Any string works
-          isWinner: null,
-
+          isWinner: true,
           name: "Japanese Wagyu Ribeye",
           image: {
             __typename: "Image",
@@ -257,8 +248,7 @@ const bracketMaster = {
         {
           id: "americanWagyuDenver10",
           seed: 10,
-
-          isWinner: null,
+          isWinner: false,
           // 'PLAYED' | 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY'
           name: "American Wagyu Denver",
           image: {
@@ -354,9 +344,9 @@ const bracketMaster = {
       tournamentRoundText: "2", // Text for Round Header
       participants: [
         {
-          id: "",
+          id: "australianWagyuFlatIron6",
           isWinner: null,
-          name: "",
+          name: "Australian Wagyu Flat Iron",
         },
         {
           id: "japaneseWagyuPicanha14",
@@ -372,9 +362,9 @@ const bracketMaster = {
       tournamentRoundText: "2", // Text for Round Header
       participants: [
         {
-          id: "",
+          id: "japaneseWagyuRibeye7",
           isWinner: null,
-          name: "",
+          name: "Japanese Wagyu Ribeye",
         },
         {
           id: "australianWagyuFilet2",
