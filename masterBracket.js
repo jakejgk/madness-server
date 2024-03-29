@@ -45,7 +45,7 @@ const bracketMaster = {
         {
           id: "australianWagyuSkirt8",
           seed: 8,
-          isWinner: null,
+          isWinner: true,
           name: "Australian Wagyu Skirt Steak",
           image: {
             __typename: "Image",
@@ -59,7 +59,7 @@ const bracketMaster = {
         {
           id: "japaneseWagyuChuck9",
           seed: 9,
-          isWinner: null,
+          isWinner: false,
           name: "Japanese Wagyu Chuck Steak",
           image: {
             __typename: "Image",
@@ -313,9 +313,9 @@ const bracketMaster = {
           name: "",
         },
         {
-          id: "",
+          id: "australianWagyuSkirt8",
           isWinner: null,
-          name: "",
+          name: "Australian Wagyu Skirt Steak",
         },
       ],
     },
