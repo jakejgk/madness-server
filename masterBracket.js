@@ -327,12 +327,12 @@ const bracketMaster = {
       participants: [
         {
           id: "usdaPrimePicanha5",
-          isWinner: null,
+          isWinner: false,
           name: "USDA Prime Picanha",
         },
         {
           id: "australianWagyuPicanhaMr13",
-          isWinner: null,
+          isWinner: true,
           name: "Australian Wagyu Picanha - Margaret River",
         },
       ],
@@ -390,9 +390,9 @@ const bracketMaster = {
           name: "Japanese Wagyu Filet",
         },
         {
-          id: "",
+          id: "australianWagyuPicanhaMr13",
           isWinner: null,
-          name: "",
+          name: "Australian Wagyu Picanha - Margaret River",
         },
       ],
     },
