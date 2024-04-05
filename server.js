@@ -210,3 +210,93 @@ async function fetchBrackets(client) {
 
   return people; // For example, returning the sorted and ranked list.
 }
+
+// app.get("/", async (req, res) => {
+//   await filterEliminatedBrackets();
+// });
+
+// filter eliminated brackets
+async function filterEliminatedBrackets() {
+  const brackets = await fetchAllBracketsWithScores();
+  const topThreeScores = getTopThreeScores(brackets);
+  let i = 0;
+  console.log("cpount: ", brackets.length);
+  const potentialWinners = brackets.filter((bracket) => {
+    const userBracket = JSON.parse(bracket.steak); // Assuming bracket data is stored in `steak`
+    const bracketScore = scoreBracket(userBracket, bracketMaster);
+    // console.log("scopre: ", bracketScore);
+    const maxPossibleScore =
+      bracketScore +
+      calculateMaxAdditionalPoints(bracket, userBracket, bracketMaster);
+
+    if (maxPossibleScore < topThreeScores[2]) {
+      console.log(i, " | ", bracket.email + " | ", maxPossibleScore);
+      i++;
+      return bracket.email;
+    } else {
+      return;
+    }
+    // Compare against the threshold to keep potential winners
+  });
+  // console.log("potential: ", potentialWinners);
+}
+
+async function fetchAllBracketsWithScores() {
+  // Fetch all brackets from the database, calculate their scores, and return them
+  const queryText = "SELECT email, steak FROM madness";
+  const { rows } = await db.query(queryText);
+
+  // Map through each row to calculate the score, ensure to return the mapped array
+  const allBracketsWithScores = rows.map((row) => ({
+    ...row,
+    score: scoreBracket(JSON.parse(row.steak), bracketMaster), // Use your existing scoring function
+  }));
+
+  return allBracketsWithScores; // Return the result
+}
+
+function calculateMaxAdditionalPoints(row, userBracket, masterBracket) {
+  let maxPoints = 0;
+  const pointsPerRound = {
+    round3: 400,
+    round4: 1000,
+  };
+
+  // Extract the IDs of the steaks in the final four of the masterBracket
+
+  const finalFourIDs = masterBracket.round3.flatMap((match) =>
+    match.participants
+      // .filter((participant) => participant.isWinner)
+      .map((participant) => participant.id)
+  );
+
+  ["round3", "round4"].forEach((roundKey) => {
+    const roundPoints = pointsPerRound[roundKey];
+    const userMatches = userBracket[roundKey] || [];
+
+    userMatches.forEach((match) => {
+      const participants = match.participants || [];
+      const winner = participants.find((p) => p.isWinner);
+
+      // Only add points if the selected winner is still in contention according to the masterBracket
+      if (!winner || !finalFourIDs.includes(winner.id)) return;
+
+      maxPoints += roundPoints; // Add base points for the match
+
+      // Find the opponent in the user's bracket to check for underdog bonus
+      const opponent = participants.find((p) => p.id !== winner.id);
+      if (opponent && winner.seed > opponent.seed) {
+        maxPoints += roundPoints * 0.5; // Apply a 50% bonus for underdog victories
+      }
+    });
+  });
+
+  return maxPoints;
+}
+
+function getTopThreeScores(brackets) {
+  // Extract the scores from the brackets, sort them, and return the top three
+  const scores = brackets.map((bracket) => bracket.score);
+  scores.sort((a, b) => b - a); // Sort in descending order
+  return scores.slice(0, 3); // Return the top three scores
+}

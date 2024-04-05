@@ -386,12 +386,12 @@ const bracketMaster = {
       participants: [
         {
           id: "japaneseWagyuFilet1", // Unique identifier of any kind
-          isWinner: null,
+          isWinner: true,
           name: "Japanese Wagyu Filet",
         },
         {
           id: "australianWagyuPicanhaMr13",
-          isWinner: null,
+          isWinner: false,
           name: "Australian Wagyu Picanha - Margaret River",
         },
       ],
@@ -428,10 +428,10 @@ const bracketMaster = {
       // 'NO_SHOW' | 'WALK_OVER' | 'NO_PARTY' | 'DONE' | 'SCORE_DONE' Only needed to decide walkovers and if teamNames are  (to be decided)
       participants: [
         {
-          id: "",
+          id: "japaneseWagyuFilet1", // Unique identifier of any kind
           isWinner: null,
           isChampion: null,
-          name: "",
+          name: "Japanese Wagyu Filet",
         },
         {
           id: "",
