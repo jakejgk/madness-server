@@ -406,12 +406,12 @@ const bracketMaster = {
       participants: [
         {
           id: "japaneseWagyuPicanha14",
-          isWinner: null,
+          isWinner: true,
           name: "Japanese Wagyu Picanha",
         },
         {
           id: "japaneseWagyuRibeye7",
-          isWinner: null,
+          isWinner: false,
           name: "Japanese Wagyu Ribeye",
         },
       ],
@@ -434,10 +434,10 @@ const bracketMaster = {
           name: "Japanese Wagyu Filet",
         },
         {
-          id: "",
+          id: "japaneseWagyuPicanha14",
           isWinner: null,
           isChampion: null,
-          name: "",
+          name: "Japanese Wagyu Picanha",
         },
       ],
     },
