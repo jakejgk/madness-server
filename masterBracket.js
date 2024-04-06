@@ -429,14 +429,14 @@ const bracketMaster = {
       participants: [
         {
           id: "japaneseWagyuFilet1", // Unique identifier of any kind
-          isWinner: null,
-          isChampion: null,
+          isWinner: false,
+          isChampion: false,
           name: "Japanese Wagyu Filet",
         },
         {
           id: "japaneseWagyuPicanha14",
-          isWinner: null,
-          isChampion: null,
+          isWinner: true,
+          isChampion: true,
           name: "Japanese Wagyu Picanha",
         },
       ],

@@ -211,33 +211,42 @@ async function fetchBrackets(client) {
   return people; // For example, returning the sorted and ranked list.
 }
 
-// app.get("/", async (req, res) => {
-//   await filterEliminatedBrackets();
-// });
-
+app.get("/", async (req, res) => {
+  await filterEliminatedBrackets();
+});
+const fs = require("fs").promises;
 // filter eliminated brackets
 async function filterEliminatedBrackets() {
   const brackets = await fetchAllBracketsWithScores();
-  const topThreeScores = getTopThreeScores(brackets);
-  let i = 0;
-  console.log("cpount: ", brackets.length);
-  const potentialWinners = brackets.filter((bracket) => {
-    const userBracket = JSON.parse(bracket.steak); // Assuming bracket data is stored in `steak`
-    const bracketScore = scoreBracket(userBracket, bracketMaster);
-    // console.log("scopre: ", bracketScore);
-    const maxPossibleScore =
-      bracketScore +
-      calculateMaxAdditionalPoints(bracket, userBracket, bracketMaster);
+  const allEmails = brackets.map((bracket) => bracket.email);
 
-    if (maxPossibleScore < topThreeScores[2]) {
-      console.log(i, " | ", bracket.email + " | ", maxPossibleScore);
-      i++;
-      return bracket.email;
-    } else {
-      return;
-    }
-    // Compare against the threshold to keep potential winners
-  });
+  // Convert the array of emails to a JSON string
+  const data = JSON.stringify(allEmails, null, 2);
+
+  // Write the JSON string to a file
+  await fs.writeFile("emails.json", data, "utf8");
+  console.log("Emails have been written to emails.json");
+  return;
+  // const topThreeScores = getTopThreeScores(brackets);
+  // let i = 0;
+  // console.log("cpount: ", brackets.length);
+  // const potentialWinners = brackets.filter((bracket) => {
+  //   const userBracket = JSON.parse(bracket.steak); // Assuming bracket data is stored in `steak`
+  //   const bracketScore = scoreBracket(userBracket, bracketMaster);
+  //   // console.log("scopre: ", bracketScore);
+  //   const maxPossibleScore =
+  //     bracketScore +
+  //     calculateMaxAdditionalPoints(bracket, userBracket, bracketMaster);
+
+  //   if (maxPossibleScore < topThreeScores[2]) {
+  //     console.log(i, " | ", bracket.email + " | ", maxPossibleScore);
+  //     i++;
+  //     return bracket.email;
+  //   } else {
+  //     return;
+  //   }
+  //   // Compare against the threshold to keep potential winners
+  // });
   // console.log("potential: ", potentialWinners);
 }
 
