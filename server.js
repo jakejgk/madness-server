@@ -211,9 +211,9 @@ async function fetchBrackets(client) {
   return people; // For example, returning the sorted and ranked list.
 }
 
-app.get("/", async (req, res) => {
-  await filterEliminatedBrackets();
-});
+// app.get("/", async (req, res) => {
+//   await filterEliminatedBrackets();
+// });
 const fs = require("fs").promises;
 // filter eliminated brackets
 async function filterEliminatedBrackets() {
